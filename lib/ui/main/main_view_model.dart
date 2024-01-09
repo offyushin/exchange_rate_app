@@ -23,12 +23,13 @@ class MainViewModel extends ChangeNotifier {
   }
 
   void inputBaseMoney(num baseMoney) {
+    final rateResult = state.rateResult!
+    .firstWhere((result) => result.baseCode == state.baseCode);
+    final rate = rateResult.rates
+    .firstWhere((rate) => rate.code == state.targetCode).rate;
     _state = state.copyWith(
       baseMoney: baseMoney,
-      targetMoney: baseMoney *
-          state.rateResult!.rates
-              .firstWhere((rate) => rate.code == state.targetCode)
-              .rate,
+      targetMoney: baseMoney * rate,
     );
     notifyListeners();
   }
@@ -38,11 +39,14 @@ class MainViewModel extends ChangeNotifier {
 
     await _updateRateResult(baseCode);
 
+    final rateResult = state.rateResult!
+        .firstWhere((result) => result.baseCode == state.baseCode);
+
+    final rate = rateResult.rates
+        .firstWhere((rate) => rate.code == state.targetCode).rate;
+
     _state = state.copyWith(
-      targetMoney: state.baseMoney *
-          state.rateResult!.rates
-              .firstWhere((rate) => rate.code == state.targetCode)
-              .rate,
+      targetMoney: state.baseMoney * rate
     );
 
     notifyListeners();
