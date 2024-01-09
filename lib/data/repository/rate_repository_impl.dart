@@ -10,7 +10,7 @@ class RateImpl implements RateRepository {
   @override
   Future<List<RateResult>> getRateResult(String baseCode) async {
     try {
-      final response = await _rateApi.getRateApi();
+      final response = await _rateApi.getRateApi('1');
       return response.map((e) => RateResult.fromJson(e)).toList();
     } catch (e) {
       throw Exception('에러다');

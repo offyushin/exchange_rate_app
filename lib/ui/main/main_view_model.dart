@@ -23,36 +23,46 @@ class MainViewModel extends ChangeNotifier {
   }
 
   void inputBaseMoney(num baseMoney) {
-    final rateResult = state.rateResult!
-    .firstWhere((result) => result.baseCode == state.baseCode);
-    final rate = rateResult.rates
-    .firstWhere((rate) => rate.code == state.targetCode).rate;
     _state = state.copyWith(
       baseMoney: baseMoney,
-      targetMoney: baseMoney * rate,
+      targetMoney: baseMoney *
+          state.rateResult!.rates
+              .firstWhere((rate) => rate.code == state.targetCode)
+              .rate,
     );
     notifyListeners();
   }
 
   void inputBaseCode(String baseCode) async {
-    _state = state.copyWith(baseCode: baseCode);
-
-    await _updateRateResult(baseCode);
-
-    final rateResult = state.rateResult!
-        .firstWhere((result) => result.baseCode == state.baseCode);
-
-    final rate = rateResult.rates
-        .firstWhere((rate) => rate.code == state.targetCode).rate;
-
     _state = state.copyWith(
-      targetMoney: state.baseMoney * rate
+      baseCode: baseCode,
+      targetMoney: state.baseMoney *
+          state.rateResult!.rates
+              .firstWhere((rate) => rate.code == baseCode)
+              .rate,
     );
-
     notifyListeners();
   }
 
-  void targetBaseMoney(num baseMoney) {}
+  void inputTargetMoney(num targetMoney) {
+    _state = state.copyWith(
+      targetMoney: targetMoney,
+      baseMoney: targetMoney /
+          state.rateResult!.rates
+              .firstWhere((rate) => rate.code == state.targetCode)
+              .rate,
+    );
+    notifyListeners();
+  }
 
-  void targetBaseCode(String baseCode) {}
+  void inputTargetCode(String targetCode) {
+    _state = state.copyWith(
+      targetCode: targetCode,
+      targetMoney: state.baseMoney *
+          state.rateResult!.rates
+              .firstWhere((rate) => rate.code == targetCode)
+              .rate,
+    );
+    notifyListeners();
+  }
 }
