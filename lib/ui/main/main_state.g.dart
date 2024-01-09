@@ -8,9 +8,9 @@ part of 'main_state.dart';
 
 _$MainStateImpl _$$MainStateImplFromJson(Map<String, dynamic> json) =>
     _$MainStateImpl(
-      rateResult: json['rateResult'] == null
-          ? null
-          : RateResult.fromJson(json['rateResult'] as Map<String, dynamic>),
+      rateResult: (json['rateResult'] as List<dynamic>?)
+          ?.map((e) => RateResult.fromJson(e as Map<String, dynamic>))
+          .toList(),
       isLoading: json['isLoading'] as bool? ?? false,
       baseMoney: json['baseMoney'] as num? ?? 1,
       targetMoney: json['targetMoney'] as num? ?? 1,

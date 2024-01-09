@@ -20,7 +20,7 @@ MainState _$MainStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MainState {
-  RateResult? get rateResult => throw _privateConstructorUsedError;
+  List<RateResult>? get rateResult => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   num get baseMoney => throw _privateConstructorUsedError;
   num get targetMoney => throw _privateConstructorUsedError;
@@ -39,14 +39,12 @@ abstract class $MainStateCopyWith<$Res> {
       _$MainStateCopyWithImpl<$Res, MainState>;
   @useResult
   $Res call(
-      {RateResult? rateResult,
+      {List<RateResult>? rateResult,
       bool isLoading,
       num baseMoney,
       num targetMoney,
       String baseCode,
       String targetCode});
-
-  $RateResultCopyWith<$Res>? get rateResult;
 }
 
 /// @nodoc
@@ -73,7 +71,7 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
       rateResult: freezed == rateResult
           ? _value.rateResult
           : rateResult // ignore: cast_nullable_to_non_nullable
-              as RateResult?,
+              as List<RateResult>?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -96,18 +94,6 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
               as String,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $RateResultCopyWith<$Res>? get rateResult {
-    if (_value.rateResult == null) {
-      return null;
-    }
-
-    return $RateResultCopyWith<$Res>(_value.rateResult!, (value) {
-      return _then(_value.copyWith(rateResult: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -119,15 +105,12 @@ abstract class _$$MainStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {RateResult? rateResult,
+      {List<RateResult>? rateResult,
       bool isLoading,
       num baseMoney,
       num targetMoney,
       String baseCode,
       String targetCode});
-
-  @override
-  $RateResultCopyWith<$Res>? get rateResult;
 }
 
 /// @nodoc
@@ -150,9 +133,9 @@ class __$$MainStateImplCopyWithImpl<$Res>
   }) {
     return _then(_$MainStateImpl(
       rateResult: freezed == rateResult
-          ? _value.rateResult
+          ? _value._rateResult
           : rateResult // ignore: cast_nullable_to_non_nullable
-              as RateResult?,
+              as List<RateResult>?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -181,18 +164,27 @@ class __$$MainStateImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
   const _$MainStateImpl(
-      {this.rateResult,
+      {final List<RateResult>? rateResult,
       this.isLoading = false,
       this.baseMoney = 1,
       this.targetMoney = 1,
       this.baseCode = 'KRW',
-      this.targetCode = 'USD'});
+      this.targetCode = 'USD'})
+      : _rateResult = rateResult;
 
   factory _$MainStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$MainStateImplFromJson(json);
 
+  final List<RateResult>? _rateResult;
   @override
-  final RateResult? rateResult;
+  List<RateResult>? get rateResult {
+    final value = _rateResult;
+    if (value == null) return null;
+    if (_rateResult is EqualUnmodifiableListView) return _rateResult;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey()
   final bool isLoading;
@@ -232,8 +224,8 @@ class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainStateImpl &&
-            (identical(other.rateResult, rateResult) ||
-                other.rateResult == rateResult) &&
+            const DeepCollectionEquality()
+                .equals(other._rateResult, _rateResult) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.baseMoney, baseMoney) ||
@@ -248,8 +240,14 @@ class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, rateResult, isLoading, baseMoney,
-      targetMoney, baseCode, targetCode);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_rateResult),
+      isLoading,
+      baseMoney,
+      targetMoney,
+      baseCode,
+      targetCode);
 
   @JsonKey(ignore: true)
   @override
@@ -267,7 +265,7 @@ class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
 
 abstract class _MainState implements MainState {
   const factory _MainState(
-      {final RateResult? rateResult,
+      {final List<RateResult>? rateResult,
       final bool isLoading,
       final num baseMoney,
       final num targetMoney,
@@ -278,7 +276,7 @@ abstract class _MainState implements MainState {
       _$MainStateImpl.fromJson;
 
   @override
-  RateResult? get rateResult;
+  List<RateResult>? get rateResult;
   @override
   bool get isLoading;
   @override

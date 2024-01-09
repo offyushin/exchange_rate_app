@@ -9,7 +9,7 @@ part 'main_state.g.dart';
 @freezed
 class MainState with _$MainState {
   const factory MainState({
-    RateResult? rateResult,
+    List<RateResult>? rateResult,
     @Default(false) bool isLoading,
     @Default(1) num baseMoney,
     @Default(1) num targetMoney,
